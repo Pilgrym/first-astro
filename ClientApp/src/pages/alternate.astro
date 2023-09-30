@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => {
+  return !data.draft;
+});
+---
+
+<Layout title="Alternate index">
+  <h1>Write your story</h1>
+
+  <ul>
+    {posts.map(it => 
+    <li>
+      <a href=`/blog/${it.slug}.html`>{it.data.title}</a>
+    </li>)}
+  </ul>
+</Layout>
